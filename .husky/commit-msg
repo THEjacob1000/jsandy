@@ -8,4 +8,4 @@ if [ "$COMMIT_MSG" = "Version Packages" ]; then
 fi
 
 # Otherwise, run the regular commitlint
-npx commitlint --edit $1
+bunx commitlint --edit $1

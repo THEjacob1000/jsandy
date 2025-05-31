@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, mock } from "bun:test";
 import { createClient } from "..";
 import { j } from "./__mocks__/jsandy.mock";
 import {
@@ -8,16 +8,16 @@ import {
 	userRouter,
 } from "./__mocks__/router.mock";
 
-vi.mock("hono/client", () => ({
-	hc: vi.fn(() => ({
-		$get: vi.fn(),
-		$post: vi.fn(),
+mock.module("hono/client", () => ({
+	hc: mock(() => ({
+		$get: mock(),
+		$post: mock(),
 	})),
 }));
 
 describe("Schema", () => {
 	beforeEach(() => {
-		vi.clearAllMocks();
+		mock.restore();
 	});
 
 	describe("Router Metadata Access", () => {

@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": ["coverage", "dist", "node_modules", "pnpm-lock.yaml"]
+		"ignore": ["coverage", "dist", "node_modules", "bun.lock"]
 	},
 	"formatter": {
 		"enabled": true,

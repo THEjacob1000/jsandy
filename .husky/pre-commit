@@ -1,8 +1,8 @@
 echo "Running Formatting..."
 
 # Format Project before committing
-pnpm format || true
-pnpm lint || true
+bun format || true
+bun lint || true
 git add .
 
 

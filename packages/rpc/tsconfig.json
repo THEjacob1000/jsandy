@@ -3,7 +3,8 @@
 	"compilerOptions": {
 		"rootDir": ".",
 		"outDir": "./dist",
-		"types": ["@cloudflare/workers-types/2023-07-01", "@types/node"],
+		"declaration": true,
+		"types": ["@cloudflare/workers-types/2023-07-01", "node", "bun"],
 		"paths": {
 			"@/*": ["./src/*"]
 		}

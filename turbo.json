@@ -22,8 +22,7 @@
 			"dependsOn": ["^test"]
 		},
 		"test:coverage": {
-			"dependsOn": ["^test:coverage"],
-			"outputs": ["coverage/**"]
+			"dependsOn": ["^test:coverage"]
 		},
 		"test:watch": {
 			"dependsOn": ["^test:watch"],

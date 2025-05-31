@@ -15,33 +15,24 @@ jobs:
       cache-key: ${{ steps.cache-key.outputs.key }}
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          version: 10.11.0
-      - uses: useblacksmith/setup-node@v5
-        with:
-          node-version: 23.11.1
-          cache: "pnpm"
+          bun-version: latest
       
       # Generate cache key for Turbo
       - name: Generate cache key
         id: cache-key
         run: |
-          echo "key=${{ runner.os }}-turbo-${{ github.sha }}-${{ hashFiles('**/pnpm-lock.yaml', '**/turbo.json', 'turbo.json') }}" >> $GITHUB_OUTPUT
+          echo "key=${{ runner.os }}-turbo-${{ github.sha }}-${{ hashFiles('**/bun.lock', '**/turbo.json', 'turbo.json') }}" >> $GITHUB_OUTPUT
       
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-      
+      # Cache Bun dependencies
       - uses: useblacksmith/cache@v5
-        name: Setup pnpm cache
+        name: Setup Bun cache
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+            ${{ runner.os }}-bun-
       
       # Cache Turbo build outputs
       - uses: useblacksmith/cache@v5
@@ -53,7 +44,7 @@ jobs:
             ${{ runner.os }}-turbo-
       
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
   # Single job to run all tasks through Turbo
   turbo-tasks:
@@ -65,27 +56,18 @@ jobs:
         task: [lint, check-types, test, build]
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          version: 10.11.0
-      - uses: useblacksmith/setup-node@v5
-        with:
-          node-version: 23.11.1
-          cache: "pnpm"
+          bun-version: latest
       
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-      
+      # Cache Bun dependencies
       - uses: useblacksmith/cache@v5
-        name: Setup pnpm cache
+        name: Setup Bun cache
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+            ${{ runner.os }}-bun-
       
       - uses: useblacksmith/cache@v5
         name: Setup Turbo cache
@@ -95,11 +77,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-turbo-
       
-      - run: pnpm install --frozen-lockfile
+      - run: bun install --frozen-lockfile
       
       # Run tasks through Turbo
       - name: Run ${{ matrix.task }}
-        run: pnpm turbo ${{ matrix.task }}
+        run: bun turbo ${{ matrix.task }}
         env:
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
           TURBO_TEAM: ${{ secrets.TURBO_TEAM }}

@@ -10,8 +10,7 @@ By participating in this project, you agree to abide by our code of conduct. Ple
 
 ### Prerequisites
 
-- Node.js 18 or higher
-- pnpm 10.11.0 or higher
+- Bun 1.0 or higher
 - Git
 
 ### Development Setup
@@ -27,7 +26,7 @@ By participating in this project, you agree to abide by our code of conduct. Ple
 3. Install dependencies:
 
    ```bash
-   pnpm install
+   bun install
    ```
 
 4. Create a new branch for your feature:
@@ -43,13 +42,13 @@ By participating in this project, you agree to abide by our code of conduct. Ple
 To build all packages:
 
 ```bash
-pnpm build
+bun build
 ```
 
 To build a specific package:
 
 ```bash
-pnpm --filter @jsandy/rpc build
+bun --filter @jsandy/rpc build
 ```
 
 ### Testing
@@ -57,19 +56,19 @@ pnpm --filter @jsandy/rpc build
 Run all tests:
 
 ```bash
-pnpm test
+bun test
 ```
 
 Run tests for a specific package:
 
 ```bash
-pnpm --filter @jsandy/rpc test
+bun --filter @jsandy/rpc test
 ```
 
 Run tests in watch mode:
 
 ```bash
-pnpm test:watch
+bun test:watch
 ```
 
 ### Linting and Formatting
@@ -77,13 +76,13 @@ pnpm test:watch
 Format code:
 
 ```bash
-pnpm format
+bun format
 ```
 
 Lint code:
 
 ```bash
-pnpm lint
+bun lint
 ```
 
 ### Type Checking
@@ -91,14 +90,14 @@ pnpm lint
 Check types across all packages:
 
 ```bash
-pnpm check-types
+bun check-types
 ```
 
 ## Project Structure
 
-This is a monorepo managed with Turborepo and pnpm workspaces:
+This is a monorepo managed with Turborepo and Bun workspaces:
 
-```
+```sh
 jsandy/
 ├── packages/
 │   ├── rpc/              # @jsandy/rpc - RPC framework
@@ -106,7 +105,7 @@ jsandy/
 │   ├── typescript-config/ # @jsandy/typescript-config - Shared TS configs
 │   └── biome-config/     # @jsandy/biome-config - Shared Biome configs
 ├── package.json          # Root package.json
-├── pnpm-workspace.yaml   # pnpm workspace config
+├── bun.lockb            # Bun lockfile
 └── turbo.json           # Turborepo config
 ```
 
@@ -133,7 +132,7 @@ Before creating an issue, please:
 
 We recommend using conventional commit format:
 
-```
+```sh
 type(scope): description
 
 [optional body]
@@ -197,7 +196,7 @@ When adding a new package:
 
 This project uses Changesets for version management:
 
-1. Run `pnpm changeset` to create a changeset
+1. Run `bun changeset` to create a changeset
 2. Describe your changes following the prompts
 3. Commit the changeset file with your PR
 4. Releases are automated when changesets are merged to main

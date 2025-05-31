@@ -1,4 +1,11 @@
-import { vi } from "vitest";
+import { afterAll, beforeEach, spyOn } from "bun:test";
 
-// Mock global fetch for tests
-global.fetch = vi.fn();
+const spyFetch = spyOn(globalThis, "fetch");
+
+beforeEach(() => {
+	spyFetch.mockReset();
+});
+
+afterAll(() => {
+	spyFetch.mockRestore();
+});

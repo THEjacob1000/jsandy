@@ -22,15 +22,13 @@ This monorepo uses modern development tools:
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
 - [Biome](https://biomejs.dev/) for fast linting and formatting
 - [Turborepo](https://turbo.build/) for efficient monorepo management
-- [Vitest](https://vitest.dev/) for fast unit testing
-- [pnpm](https://pnpm.io/) for efficient package management
+- [Bun](https://bun.sh/) for fast package management and runtime
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+
-- pnpm 10.11.0+
+- Bun 1.2+
 
 ### Installation
 
@@ -39,7 +37,7 @@ Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/JacobDevelops/jsandy.git
 cd jsandy
-pnpm install
+bun install
 ```
 
 ### Development
@@ -47,20 +45,20 @@ pnpm install
 To build all packages:
 
 ```bash
-pnpm build
+bun run build
 ```
 
 To run tests:
 
 ```bash
-pnpm test
+bun test
 ```
 
 To format and lint code:
 
 ```bash
-pnpm format
-pnpm lint
+bun format
+bun lint
 ```
 
 ## Contributing
@@ -76,4 +74,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](licenses/L
 - [Turborepo Documentation](https://turbo.build/repo/docs)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Biome](https://biomejs.dev/)
-- [Vitest](https://vitest.dev/)
+- [Bun](https://bun.sh/)

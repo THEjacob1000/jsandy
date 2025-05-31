@@ -1,12 +1,9 @@
 name: Release
-
 on:
   push:
     branches:
       - main
-
 concurrency: ${{ github.workflow }}-${{ github.ref }}
-
 jobs:
   release:
     name: Release
@@ -14,28 +11,19 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: useblacksmith/setup-node@v5
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: 22.6
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.11.0
-
+          bun-version: latest
       - name: Install Dependencies
-        run: pnpm install
-
+        run: bun install --frozen-lockfile
       - name: Fix file permissions
         run: chmod -x .husky/commit-msg
-
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: pnpm release
+          publish: bun release
           commitMode: github-api
         env:
           GITHUB_TOKEN: ${{ secrets.JACOB_DEVELOPS_GH_TOKEN }}
