@@ -1,12 +1,16 @@
 {
 	"name": "@jsandy/rpc",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"publishConfig": {
 		"access": "public"
 	},
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
-	"files": ["dist", "README.md", "CHANGELOG.md"],
+	"files": [
+		"dist",
+		"README.md",
+		"CHANGELOG.md"
+	],
 	"exports": {
 		".": {
 			"import": {
